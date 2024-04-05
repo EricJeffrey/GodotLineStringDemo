@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://bohb74eo8k383"]
+
+[ext_resource type="Script" path="res://line_tester.gd" id="1_4qc0t"]
+[ext_resource type="PackedScene" uid="uid://dfv654aucybjq" path="res://line_particle.tscn" id="2_0jdk0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mcv0v"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yq0bh"]
+albedo_color = Color(0.823529, 0.823529, 0.823529, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gwhvo"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5h3ge"]
+albedo_color = Color(0.501961, 1, 0.294118, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_77v41"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[node name="LineTester" type="Node3D"]
+script = ExtResource("1_4qc0t")
+line_particle = ExtResource("2_0jdk0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_mcv0v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+material_override = SubResource("StandardMaterial3D_yq0bh")
+mesh = SubResource("BoxMesh_gwhvo")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -3, 5, -14.3295)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 23, 10)
+
+[node name="Pivot" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21, 0)
+material_override = SubResource("StandardMaterial3D_5h3ge")
+mesh = SubResource("BoxMesh_77v41")
+skeleton = NodePath("")
